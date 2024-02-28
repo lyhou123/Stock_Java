@@ -1,14 +1,22 @@
 package menu;
 
 import ProductModel.Product;
+import Utils.Singleton;
+import dao.ProductServiceImpl;
 import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class ClassUI {
+   private static Scanner scanner=new Scanner(System.in);
+    public ClassUI()
+    {
+        scanner= Singleton.scanner();
+    }
     public static void MainMenu()
     {
         Table table = new Table(10, BorderStyle.CLASSIC_COMPATIBLE_WIDE, ShownBorders.ALL);
@@ -28,8 +36,8 @@ public class ClassUI {
         System.out.println(table.render());
     }
     public static void viewProductList(List<Product> products) {
-
-        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        String op;
+        Table table = new Table(5, BorderStyle.UNICODE_ROUND_BOX, ShownBorders.ALL);
         CellStyle cellCenter = new CellStyle(CellStyle.HorizontalAlign.center);
         String[] headers = {"ID", "NAME", "Qty", "Unit Price","Imported Date"};
         for (String header: headers) {
@@ -47,10 +55,11 @@ public class ClassUI {
             table.addCell(product.getLocalDate()+"", cellCenter);
         });
         System.out.println(table.render());
+
     }
     public static void displayHelp() {
         System.out.println("# Help Instruction");
-        Table table = new Table(1, BorderStyle.CLASSIC_COMPATIBLE_WIDE, ShownBorders.SURROUND);
+        Table table = new Table(1,BorderStyle.UNICODE_ROUND_BOX, ShownBorders.ALL);
         table.addCell("1.      Press       l : Display product as table");
         table.addCell("2.      Press       w : Create a new product");
         table.addCell("3.      Press       r : View product details by code");
@@ -60,19 +69,21 @@ public class ClassUI {
         table.addCell("7.      Press       c : Commit transaction data");
         table.addCell("8.      Press       k : Backup data");
         table.addCell("9.      Press       t : Restore data");
-        table.addCell("10.     Press       f : Navigate pagination to the last page");
+        table.addCell("10.     Press       l : Navigate pagination to the last page");
         table.addCell("11.     Press       p : Navigate pagination to the previous page");
         table.addCell("12.     Press       n : Navigate pagination to the next page");
-        table.addCell("13.     Press       1 : Navigate pagination to the first page");
-        table.addCell("14.     Press       h : Help");
-        table.addCell("15.     Press       b : Step Back of the Application");
+        table.addCell("13.     Press       f : Navigate pagination to the first page");
+        table.addCell("14.     Press       g : Navigate pagination to the Specific page");
+        table.addCell("15.     Press       o : Set Row of Product List");
+        table.addCell("16.     Press       h : Help");
+        table.addCell("17.     Press       b : Step Back of the Application");
 
         System.out.println(table.render());
 
     }
     public static void Product(Product product)
     {
-        Table table = new Table(5, BorderStyle.UNICODE_BOX_DOUBLE_BORDER, ShownBorders.ALL);
+        Table table = new Table(5, BorderStyle.UNICODE_ROUND_BOX, ShownBorders.ALL);
         CellStyle cellCenter = new CellStyle(CellStyle.HorizontalAlign.center);
         String[] headers = {"ID", "NAME", "Qty", "Unit Price","Imported Date"};
         for (String header: headers) {
